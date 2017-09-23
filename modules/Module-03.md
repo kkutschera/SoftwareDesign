@@ -2,7 +2,7 @@
 
 ## Description
 
-The most difficult thing to reason about when looking at a program is state changes. What operations can have a side-effect, on which path can data flow, what impacts what? Is this module, I will clarify what object state is and how we can manage to keep control over its state in a principled way so we don't let the genie out of the bottle every time we instantiate an object.
+The most difficult thing to reason about when looking at a program is state changes. What operations can have a side-effect, on which path can data flow, what impacts what? In this module, I will clarify what object state is and how we can manage to keep control over its state in a principled way so we don't let the genie out of the bottle every time we instantiate an object.
 
 ## Learning Objectives
 
@@ -24,7 +24,7 @@ There are different way we can look at a software system. One way is in terms of
 
 This duality between the static and dynamic perspective on a software system is akin to the wave-particle duality for representing the phenomenon of light in physics:
 
-> It seems as though we must use sometimes the one theory and sometimes the other, while at times we may use either. […] We have two contradictory pictures of reality; separately neither of them fully explains the phenomena of light, but together they do. - Albert Einstein and Leopold Infeld, The Evolution of Physics, pg. 262-263
+> It seems as though we must use sometimes the one theory and sometimes the other, while at times we may use either. [â€¦] We have two contradictory pictures of reality; separately neither of them fully explains the phenomena of light, but together they do. - Albert Einstein and Leopold Infeld, The Evolution of Physics, pg. 262-263
 
 So, to paraphrase for software design: It seems as though we must use sometimes the one perspective and sometimes the other, while at times we may use either. We have two *complementary* pictures of a program; separately neither of them fully explains the phenomena of software, but together they do.
 
@@ -119,7 +119,7 @@ card1.equals(card2)
 
 will return true.
 
-A very important note when overriding `equals` in Java, is that any class that overrides `equals` must also override `hashCode` so that the following constraint is respected: "If two objects are equal according to the equals(Object) method, then calling the hashCode method on each of the two objects must produce the same integer result." [Javadocs](http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#hashCode--). This constraint is necessary because, among other, many classes of the collections framework rely interchangeably on equality testing and on an object’s hashCode for indexing objects in internal data structures. 
+A very important note when overriding `equals` in Java, is that any class that overrides `equals` must also override `hashCode` so that the following constraint is respected: "If two objects are equal according to the equals(Object) method, then calling the hashCode method on each of the two objects must produce the same integer result." [Javadocs](http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#hashCode--). This constraint is necessary because, among other, many classes of the collections framework rely interchangeably on equality testing and on an objectâ€™s hashCode for indexing objects in internal data structures. 
 
 A final consideration related to identity and equality is the concept of **uniqueness**. In our example program, we could rightfully wonder what is the use of tolerating duplicate objects that represent exactly the same card (e.g., ace of clubs). A sometimes very useful property for the objects of a class is *uniqueness*. Objects of a class are unique if it is not possible for two distinct objects to be equal. If the objects of a class can be guaranteed to be unique, then we no longer need to define equality, because in this specific case, equality become identical to identity and we can compare objects using the `==` operator. Although strict guarantees of uniqueness are almost impossible to achieve in Java due to mechanisms such as reflection and serialization, in practice the use of two design patterns and the conscious avoidance of these mechanisms provides a "pretty good" guarantee that can help greatly simplify some designs.
 
@@ -210,7 +210,7 @@ Exercises prefixed with **(+)** are optional, more challenging questions aimed t
 
 For maximum learning effectiveness, I recommend peeking at the [answers](answers/Answers-03.md) only after giving the problems an honest try.
 
-0. Create a UML State Diagram that models the abstract states of a hypothetical `Dryer` object that behaves as follows. *The dryer is normally off. To get it to operate you have to put in 2.00$. Once the money is inserted, you cannot add additional credit until the drying is over. The mechanism to insert the money only allows you to put the exact amount in one go. To start the machine once the money is inserted, you have to close the door and press the start button. The dryer will then operate for exactly 60 minutes, and then stop by itself. If you open the door while it’s in operation, the dryer will stop and whatever time was left is lost.*
+0. Create a UML State Diagram that models the abstract states of a hypothetical `Dryer` object that behaves as follows. *The dryer is normally off. To get it to operate you have to put in 2.00$. Once the money is inserted, you cannot add additional credit until the drying is over. The mechanism to insert the money only allows you to put the exact amount in one go. To start the machine once the money is inserted, you have to close the door and press the start button. The dryer will then operate for exactly 60 minutes, and then stop by itself. If you open the door while itâ€™s in operation, the dryer will stop and whatever time was left is lost.*
 
 0. Create a UML State Diagram that models the abstract states of a hypothetical `VendingMachine` object that behaves as follows. *The machine sells a selection of different drinks. All drinks have a price, not necessarily the same. If a user selects a drink, the price is displayed. If the user adds enough coins within 60 seconds, the drink is provided and change is returned. If a user adds coins without selecting a drink, the available balance is shown. If a user selects a drink that is worth less than the balance, the drink is provided and changed is returned. If not, an error message shows "insufficient balance". A reset button resets any selection and returns the balance.*
 
